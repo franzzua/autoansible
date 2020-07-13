@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/esm",
+    "declaration": false,
+    "module": "commonjs",
+    "target": "es2018",
+    "moduleResolution": "node",
+    "downlevelIteration": true,
+    "sourceMap": true,
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "esnext",
+      "es2015.promise",
+      "dom",
+      "ES2019.Array",
+      "ES2015.Iterable"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

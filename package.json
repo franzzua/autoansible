@@ -1,0 +1,25 @@
+{
+  "name": "@gm/autoansible",
+  "scripts": {
+    "build": "tsc --watch",
+    "run": "nodemon ./dist/esm/start/server.js",
+    "info": "node .\\dist\\esm\\start\\deploy.js import grib",
+    "upd&deploy": "npm version patch && npm publish"
+  },
+  "devDependencies": {
+    "@types/node": "latest"
+  },
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "autoansible-server": "./dist/esm/start/server.js",
+    "autoansible-deploy": "./dist/esm/start/deploy.js"
+  },
+  "dependencies": {
+    "ini": "latest",
+    "nedb": "^1.8.0",
+    "yaml": "latest"
+  },
+  "version": "1.0.15"
+}

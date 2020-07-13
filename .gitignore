@@ -1,0 +1,6 @@
+node_modules
+*.js
+*.js.map
+localhost-cert.pem
+localhost-privkey.pem
+package-lock.json
