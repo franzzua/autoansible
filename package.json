@@ -19,6 +19,7 @@
   "dependencies": {
     "ini": "latest",
     "nedb": "^1.8.0",
+    "npm-api": "latest",
     "yaml": "latest"
   },
   "version": "1.0.15"

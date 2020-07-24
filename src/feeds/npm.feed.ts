@@ -1,0 +1,32 @@
+import {requestAsync} from "../request";
+import {SemVer} from "../sem.ver";
+import {Feed, Package} from "./feed";
+import * as NpmApi from "npm-api";
+
+export class NpmFeed extends Feed<NugetPackage> {
+
+    private api = new NpmApi();
+
+    protected async LoadPackages() {
+        try {
+            const packagesResult: any = await requestAsync(this.host, `/nuget/${this.feed}/Packages?\$format=json`);
+            const packages = packagesResult.d.results.map(({Id, Version}) => ({Id, Version}));
+            packages
+                .map(pkg => ({Name: pkg.Id, Version: SemVer.Parse(pkg.Version)} as NugetPackage))
+                .forEach(pkg => this.LoadPackage(pkg));
+        }catch (e) {
+            console.error(this.host, `/nuget/${this.feed}/Packages?\$format=json`,e);
+        }
+    }
+
+    protected async Remove(name: string, packages: NugetPackage[]): Promise<any> {
+        for (let p of packages) {
+            await requestAsync(this.host, `/nuget/${this.feed}/package/${name}/${p.Version.toString()}`, 'DELETE', {}, `api:${this.token}`);
+        }
+    }
+}
+
+
+export type NugetPackage = Package & {
+
+}
