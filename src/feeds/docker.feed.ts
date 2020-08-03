@@ -17,6 +17,7 @@ export class DockerFeed extends Feed<DockerPackage> {
                     if (existed.includes(tag))
                         continue;
                     const manifest = await this.getManifest(repo, tag);
+                    console.log('new', repo, tag);
                     this.LoadPackage({
                         Name: repo,
                         Version: SemVer.Parse(tag),
@@ -25,21 +26,24 @@ export class DockerFeed extends Feed<DockerPackage> {
                 }
             }
         } catch (e) {
-            console.error(this.host, `/nuget/${this.feed}/Packages?\$format=json`,e);
         }
     }
 
 
     protected async Remove(name: string, packages: DockerPackage[]): Promise<any> {
+        console.log('delete', name, ...packages.map(x => x.Version.toString()));
         for (let p of packages) {
             await this.deleteDockerTag(p.Name, p.Manifest);
         }
-
+        // все слои из удаляемых пакетов
+        const layersToDelete =  [...new Set(packages.flatMap(x => this.getLayers(x.Manifest)))];
+        // неудаляемые пакеты
         const notDeletePackages = this.Packages[name].filter(x => !packages.includes(x));
+        // слои которые нужно оставить
         const notDeleteLayers =  new Set(notDeletePackages.flatMap(x => this.getLayers(x.Manifest)));
-        const deleteLayers = [...new Set(packages
-            .flatMap(x => this.getLayers(x.Manifest))
-            .filter(x => !notDeleteLayers.has(x)))];
+        // слои которые нужно удалить - все из удаляемых кроме тех что нужно оставить
+        const deleteLayers = layersToDelete
+            .filter(x => !notDeleteLayers.has(x));
 
         // console.log(blobsToDelete);
         await deleteLayers.reduce(async (old, blob) => {
