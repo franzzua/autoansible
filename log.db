@@ -1,6 +1,0 @@
-{"group":"api","role":"auth","host":"dev-ost","version":"*","result":"waiting","time":"2020-06-30T11:17:30.711Z","_id":"V6vihHczrRhspGbv"}
-{"group":"AuthServer","host":"dev-ost","version":"*","result":"waiting","time":"2020-06-30T11:16:23.159Z","_id":"XJtMSgi3Qcfwphkl"}
-{"group":"web","role":"gis","host":"dev-nord","version":".*","result":"waiting","time":"2020-06-30T11:02:32.545Z","_id":"awS7DCKrdmaNuppZ"}
-{"group":"web","role":"gis","host":"dev-nord","version":"2.0.255","result":"success","time":"2020-06-30T10:49:29.932Z","_id":"fNowiWmwLpbvxocz"}
-{"group":"api","role":"auth","host":"dev-ost","version":"*","result":"failure","time":"2020-06-30T11:18:08.991Z","_id":"o1sHJdFsi8BjyQBu"}
-{"$$indexCreated":{"fieldName":"time","unique":false,"sparse":false}}
