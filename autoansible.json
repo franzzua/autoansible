@@ -1,7 +1,7 @@
 {
   "ansible": {
     "wsl": true,
-    "rootDir": "A:\\infra-webgis",
+    "rootDir": "a:\\mm\\back\\infra-webgis\\",
     "playbook": "apps.yml"
   },
   "feeds": [
