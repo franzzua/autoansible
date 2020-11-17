@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ad682b8-36ed-46b6-89bd-3737743dc3ac" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/feeds/npm.feed.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autoansible.json" beforeDir="false" afterPath="$PROJECT_DIR$/autoansible.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="4ad682b8-36ed-46b6-89bd-3737743dc3ac" name="Default Changelist" comment="fix deploy queue" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,40 +34,37 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1doLYVebRUKrrZW42VOLMI9xLRt" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/feeds" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/handlers" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2018.2.5\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="A:\autoansible\src\handlers" />
+      <recent name="A:\autoansible\src" />
+    </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="A:\autoansible\src\handlers\upgrade.ts" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="A:\autoansible\src\start" />
       <recent name="A:\autoansible\src\feeds" />
       <recent name="A:\autoansible\src\cleaner" />
       <recent name="A:\autoansible\src" />
     </key>
-    <key name="es6.move.members.recent.items">
-      <recent name="A:\autoansible\src\handlers\upgrade.ts" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="A:\autoansible\src\feeds" />
-      <recent name="A:\autoansible\src\handlers" />
-      <recent name="A:\autoansible\src" />
-    </key>
   </component>
-  <component name="RunManager" selected="npm.upd&amp;deploy">
+  <component name="RunManager" selected="npm.build">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -98,8 +107,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.upd&amp;deploy" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.upd&amp;deploy" />
         <item itemvalue="npm.run" />
         <item itemvalue="npm.info" />
       </list>
@@ -120,59 +129,33 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-    <option name="exactExcludedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/../gismeteo/packages/core/interfaces/IRenderData.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/packages/domain/node_modules/@gm/isomorphic-core/interfaces/IRenderData.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/packages/core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/packages/core/transform/matrix.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/packages/core/transform/transform.matrix.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/packages/core/shapes/point.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/packages/slide-element/node_modules/@gm/isomorphic-core/shapes/point.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/gm/node_modules/@gm/server-core/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/gm/node_modules/@gm/server-core/node_modules/@gm/isomorphic-render/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/gm/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/gm/node_modules/@gm/isomorphic-domain/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/gm/node_modules/@gm/isomorphic-domain/node_modules/@gm/isomorphic-render/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/gm/node_modules/@gm/isomorphic-render/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/core/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/core/node_modules/@gm/isomorphic-render/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/tile-generator/node_modules/@gm/server-core/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/tile-generator/node_modules/@gm/server-core/node_modules/@gm/isomorphic-render/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/tile-generator/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/tile-generator/node_modules/@gm/isomorphic-domain/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/tile-generator/node_modules/@gm/isomorphic-domain/node_modules/@gm/isomorphic-render/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-        <option value="$PROJECT_DIR$/../gismeteo/server/tile-generator/node_modules/@gm/isomorphic-render/node_modules/@gm/isomorphic-core/functions/CarryApply.d.ts" />
-      </list>
-    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state width="983" height="646" key="DebuggerActiveHint" timestamp="1593158917471">
       <screen x="0" y="0" width="3840" height="2130" />
     </state>
     <state width="983" height="646" key="DebuggerActiveHint/0.0.3840.2130@0.0.3840.2130" timestamp="1593158917471" />
-    <state width="434" height="576" key="GridCell.Tab.0.bottom" timestamp="1595344145953">
-      <screen x="0" y="0" width="1366" height="738" />
+    <state width="609" height="879" key="GridCell.Tab.0.bottom" timestamp="1594628346915">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="434" height="576" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1595344145953" />
     <state width="609" height="879" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1594628346915" />
     <state width="613" height="1252" key="GridCell.Tab.0.bottom/0.0.3840.2130@0.0.3840.2130" timestamp="1594108987212" />
-    <state width="434" height="576" key="GridCell.Tab.0.center" timestamp="1595344145952">
-      <screen x="0" y="0" width="1366" height="738" />
+    <state width="609" height="879" key="GridCell.Tab.0.center" timestamp="1594628346915">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="434" height="576" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1595344145952" />
     <state width="609" height="879" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1594628346915" />
     <state width="613" height="1252" key="GridCell.Tab.0.center/0.0.3840.2130@0.0.3840.2130" timestamp="1594108987212" />
-    <state width="434" height="576" key="GridCell.Tab.0.left" timestamp="1595344145952">
-      <screen x="0" y="0" width="1366" height="738" />
+    <state width="609" height="879" key="GridCell.Tab.0.left" timestamp="1594628346915">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="434" height="576" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1595344145952" />
     <state width="609" height="879" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1594628346915" />
     <state width="613" height="1252" key="GridCell.Tab.0.left/0.0.3840.2130@0.0.3840.2130" timestamp="1594108987212" />
-    <state width="434" height="576" key="GridCell.Tab.0.right" timestamp="1595344145952">
-      <screen x="0" y="0" width="1366" height="738" />
+    <state width="609" height="879" key="GridCell.Tab.0.right" timestamp="1594628346915">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="434" height="576" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1595344145952" />
     <state width="609" height="879" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1594628346915" />
     <state width="613" height="1252" key="GridCell.Tab.0.right/0.0.3840.2130@0.0.3840.2130" timestamp="1594108987212" />
     <state width="912" height="476" key="GridCell.Tab.1.bottom" timestamp="1594055745364">
@@ -207,14 +190,10 @@
       <screen x="0" y="0" width="3840" height="2130" />
     </state>
     <state width="912" height="476" key="GridCell.Tab.2.right/0.0.3840.2130@0.0.3840.2130" timestamp="1594055745364" />
-    <state x="552" y="260" key="Vcs.Push.Dialog.v2" timestamp="1594639025987">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="825" y="242" key="RollbackChangesDialog" timestamp="1594719871885">
+      <screen x="66" y="0" width="1854" height="1080" />
     </state>
-    <state x="552" y="260" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1594639025987" />
-    <state x="485" y="287" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1595255176538">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="485" y="287" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.738@0.0.1366.738" timestamp="1595255176538" />
+    <state x="825" y="242" key="RollbackChangesDialog/66.0.1854.1080@66.0.1854.1080" timestamp="1594719871885" />
     <state x="2007" y="1133" width="642" height="564" key="find.popup" timestamp="1594028431367">
       <screen x="0" y="0" width="3840" height="2130" />
     </state>

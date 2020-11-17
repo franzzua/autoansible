@@ -42,7 +42,9 @@ const deployQueue = [];
 export async function deployWithQueue(task: ITask,
                                       onErr = (c) => console.error(c.toString()),
                                       onData = (a) => console.log(a.toString())) {
-    await Promise.all(deployQueue);
+    while (deployQueue.length) {
+        await Promise.all(deployQueue);
+    }
     const promise = deploy(task, onErr, onData);
     deployQueue.push(promise);
     await promise;

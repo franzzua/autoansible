@@ -19,8 +19,8 @@
   "dependencies": {
     "ini": "latest",
     "nedb": "^1.8.0",
-    "npm-api": "latest",
-    "yaml": "latest"
+    "yaml": "latest",
+    "typescript": "3.7.4"
   },
-  "version": "1.0.15"
+  "version": "1.0.17"
 }
