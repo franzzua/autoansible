@@ -17,8 +17,12 @@ export const requestAsync = (hostname, path, method = 'GET', headers = {}, auth 
                     ...(textData ? JSON.parse(textData) : {}),
                     _headers: res.headers
                 }));
-            } else
+            } else {
                 res.on('data', data => reject(data.toString()));
+                res.on('end', (data) => {
+                    reject(res.statusCode);
+                });
+            }
         }).end()
     }catch (e) {
         console.error(options);

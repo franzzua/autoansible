@@ -2,7 +2,6 @@ import {requestAsync} from "../request";
 import {Feed, Package} from "./feed";
 import {SemVer} from "../sem.ver";
 
-
 export type DockerPackage = Package & {Manifest;};
 export class DockerFeed extends Feed<DockerPackage> {
     private Layers: string[];
@@ -29,11 +28,7 @@ export class DockerFeed extends Feed<DockerPackage> {
         }
     }
 
-
     protected async Remove(name: string, packages: DockerPackage[]): Promise<any> {
-        for (let p of packages) {
-            await this.deleteDockerTag(p.Name, p.Manifest);
-        }
 
         const notDeletePackages = this.Packages[name].filter(x => !packages.includes(x));
         const notDeleteLayers =  new Set(notDeletePackages.flatMap(x => this.getLayers(x.Manifest)));
@@ -46,13 +41,17 @@ export class DockerFeed extends Feed<DockerPackage> {
             await old;
             await this.deleteBlob(name, blob)
         }, Promise.resolve());
+
+        for (let p of packages) {
+            await this.deleteDockerTag(p.Name, p.Manifest);
+        }
     }
 
     private async deleteBlob(repo, blob) {
         try {
             await requestAsync(this.host, `/v2/${repo}/blobs/${blob}`, 'DELETE', {}, `api:${this.token}`);
         } catch (e) {
-
+            console.warn(`unable delete blob ${blob} from ${repo}`, e);
         }
     }
 
@@ -61,7 +60,7 @@ export class DockerFeed extends Feed<DockerPackage> {
             const {'docker-content-digest': digest} = manifest._headers;
             await requestAsync(this.host, `/v2/${repo}/manifests/${digest}`, 'DELETE', {}, `api:${this.token}`);
         } catch (e) {
-            console.error(e);
+            console.warn(`unable delete ${repo} manifest ${manifest.tag}`);
         }
     }
 
@@ -72,7 +71,7 @@ export class DockerFeed extends Feed<DockerPackage> {
     }
 
     private getLayers(manifest) {
-        return manifest.layers.map(layer => layer.digest);
+        return manifest?.layers?.map(layer => layer.digest) ?? [];
     }
 
 
