@@ -50,6 +50,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -66,7 +67,7 @@
       <recent name="A:\autoansible\src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.run">
+  <component name="RunManager" selected="npm.upd&amp;deploy">
     <configuration name="server.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="dist/esm/start/server.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
@@ -119,10 +120,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.upd&amp;deploy" />
         <item itemvalue="npm.run" />
         <item itemvalue="npm.build" />
         <item itemvalue="Node.js.server.js" />
-        <item itemvalue="npm.upd&amp;deploy" />
         <item itemvalue="npm.info" />
       </list>
     </recent_temporary>
@@ -138,6 +139,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1593086546462</updated>
+      <workItem from="1610612218840" duration="1136000" />
     </task>
     <task id="LOCAL-00001" summary="upd docker cleaner">
       <created>1608025788344</created>
@@ -146,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608025788344</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="upd docker cleaner">
+      <created>1610612240945</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1610612240945</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,22 +186,22 @@
       <screen x="0" y="0" width="3840" height="2130" />
     </state>
     <state x="1516" y="1041" key="#xdebugger.evaluate/0.0.3840.2130@0.0.3840.2130" timestamp="1606809909881" />
-    <state width="470" height="1266" key="GridCell.Tab.0.bottom" timestamp="1609251332939">
+    <state width="469" height="1069" key="GridCell.Tab.0.bottom" timestamp="1610620321656">
       <screen x="0" y="0" width="3840" height="2130" />
     </state>
-    <state width="470" height="1266" key="GridCell.Tab.0.bottom/0.0.3840.2130@0.0.3840.2130" timestamp="1609251332939" />
-    <state width="470" height="1266" key="GridCell.Tab.0.center" timestamp="1609251332939">
+    <state width="469" height="1069" key="GridCell.Tab.0.bottom/0.0.3840.2130@0.0.3840.2130" timestamp="1610620321656" />
+    <state width="469" height="1069" key="GridCell.Tab.0.center" timestamp="1610620321655">
       <screen x="0" y="0" width="3840" height="2130" />
     </state>
-    <state width="470" height="1266" key="GridCell.Tab.0.center/0.0.3840.2130@0.0.3840.2130" timestamp="1609251332939" />
-    <state width="470" height="1266" key="GridCell.Tab.0.left" timestamp="1609251332939">
+    <state width="469" height="1069" key="GridCell.Tab.0.center/0.0.3840.2130@0.0.3840.2130" timestamp="1610620321655" />
+    <state width="469" height="1069" key="GridCell.Tab.0.left" timestamp="1610620321655">
       <screen x="0" y="0" width="3840" height="2130" />
     </state>
-    <state width="470" height="1266" key="GridCell.Tab.0.left/0.0.3840.2130@0.0.3840.2130" timestamp="1609251332939" />
-    <state width="470" height="1266" key="GridCell.Tab.0.right" timestamp="1609251332939">
+    <state width="469" height="1069" key="GridCell.Tab.0.left/0.0.3840.2130@0.0.3840.2130" timestamp="1610620321655" />
+    <state width="469" height="1069" key="GridCell.Tab.0.right" timestamp="1610620321655">
       <screen x="0" y="0" width="3840" height="2130" />
     </state>
-    <state width="470" height="1266" key="GridCell.Tab.0.right/0.0.3840.2130@0.0.3840.2130" timestamp="1609251332939" />
+    <state width="469" height="1069" key="GridCell.Tab.0.right/0.0.3840.2130@0.0.3840.2130" timestamp="1610620321655" />
     <state width="970" height="591" key="GridCell.Tab.1.bottom" timestamp="1607423172227">
       <screen x="0" y="0" width="3840" height="2130" />
     </state>
