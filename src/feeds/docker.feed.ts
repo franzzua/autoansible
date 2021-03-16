@@ -75,5 +75,25 @@ export class DockerFeed extends Feed<DockerPackage> {
     }
 
 
+    public async getAllLayers(): Promise<{image,layers}[]> {
+        await this.init$;
+        const res = [] as {image,layers}[];
+        for (let pacakges of Object.values(this.Packages)){
+            for (let p of pacakges){
+                if (p.Manifest.layers){
+                    res.push({
+                        image: `${p.Name}.${p.Version.toString()}}`,
+                        layers: p.Manifest.layers.map(x => x.digest.substr('sha256:'.length))
+                    });
+                }else{
+                    res.push({
+                        image: `${p.Name}.${p.Version.toString()}}`,
+                        layers: p.Manifest.fsLayers.map(x => x.blobSum.substr('sha256:'.length))
+                    });
+                }
+            }
+        }
+        return res;
+    }
 }
 
