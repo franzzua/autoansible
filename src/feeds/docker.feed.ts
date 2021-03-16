@@ -26,11 +26,12 @@ export class DockerFeed extends Feed<DockerPackage> {
                 }
             }
         } catch (e) {
+            console.error(this.host, `/nuget/${this.feed}/Packages?\$format=json`,e);
         }
     }
 
-
     protected async Remove(name: string, packages: DockerPackage[]): Promise<any> {
+
         console.log('delete', name, ...packages.map(x => x.Version.toString()));
         for (let p of packages) {
             await this.deleteDockerTag(p.Name, p.Manifest);
@@ -50,13 +51,17 @@ export class DockerFeed extends Feed<DockerPackage> {
             await old;
             await this.deleteBlob(name, blob)
         }, Promise.resolve());
+
+        for (let p of packages) {
+            await this.deleteDockerTag(p.Name, p.Manifest);
+        }
     }
 
     private async deleteBlob(repo, blob) {
         try {
             await requestAsync(this.host, `/v2/${repo}/blobs/${blob}`, 'DELETE', {}, `api:${this.token}`);
         } catch (e) {
-
+            console.warn(`unable delete blob ${blob} from ${repo}`, e);
         }
     }
 
@@ -65,7 +70,7 @@ export class DockerFeed extends Feed<DockerPackage> {
             const {'docker-content-digest': digest} = manifest._headers;
             await requestAsync(this.host, `/v2/${repo}/manifests/${digest}`, 'DELETE', {}, `api:${this.token}`);
         } catch (e) {
-            console.error(e);
+            console.warn(`unable delete ${repo} manifest ${manifest.tag}`);
         }
     }
 
@@ -76,9 +81,29 @@ export class DockerFeed extends Feed<DockerPackage> {
     }
 
     private getLayers(manifest) {
-        return manifest.layers.map(layer => layer.digest);
+        return manifest?.layers?.map(layer => layer.digest) ?? [];
     }
 
 
+    public async getAllLayers(): Promise<{image,layers}[]> {
+        await this.init$;
+        const res = [] as {image,layers}[];
+        for (let pacakges of Object.values(this.Packages)){
+            for (let p of pacakges){
+                if (p.Manifest.layers){
+                    res.push({
+                        image: `${p.Name}.${p.Version.toString()}}`,
+                        layers: p.Manifest.layers.map(x => x.digest.substr('sha256:'.length))
+                    });
+                }else{
+                    res.push({
+                        image: `${p.Name}.${p.Version.toString()}}`,
+                        layers: p.Manifest.fsLayers.map(x => x.blobSum.substr('sha256:'.length))
+                    });
+                }
+            }
+        }
+        return res;
+    }
 }
 

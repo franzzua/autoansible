@@ -8,19 +8,19 @@
     {
       "host": "proget2.mapmakers.ru",
       "feed": "dev",
-      "token": "MOPrRT26zPe7wFn4_--0",
+      "token": "48bKfRr9TZZjEykbmkDB",
       "type": "docker"
     },
     {
       "host": "proget2.mapmakers.ru",
       "feed": "infr",
-      "token": "MOPrRT26zPe7wFn4_--0",
+      "token": "48bKfRr9TZZjEykbmkDB",
       "type": "docker"
     },
     {
       "host": "proget2.mapmakers.ru",
       "feed": "artifacts",
-      "token": "MOPrRT26zPe7wFn4_--0",
+      "token": "48bKfRr9TZZjEykbmkDB",
       "type": "nuget"
     }
   ],
@@ -31,7 +31,7 @@
         "count": 3
       },
       {
-        "versions": "^(\\d+\\.){2}\\d+$",
+        "versions": "^(\\d+\\.){2}[1-9]\\d*$",
         "count": 3
       },
       {

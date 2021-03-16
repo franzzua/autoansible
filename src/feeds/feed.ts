@@ -34,7 +34,13 @@ export abstract class Feed<TPackage extends Package = Package> {
         this.Listeners.push({key, listener});
     }
 
+
+    private cleanLock = false;
+
     public async Clean(rules: { versions, count }[]) {
+        if (this.cleanLock)
+            return;
+        this.cleanLock = true;
         for (const [name, values] of Object.entries(this.Packages)) {
             const toRemove: TPackage[] = [];
             for (let rule of rules) {
@@ -42,7 +48,7 @@ export abstract class Feed<TPackage extends Package = Package> {
                 const versions = values
                     .filter(x => regex.test(x.Version.toString()));
                 if (versions.length > rule.count)
-                    toRemove.push(...versions.slice(0, - rule.count));
+                    toRemove.push(...versions.slice(0, -rule.count));
             }
             if (toRemove.length == 0)
                 continue;
@@ -52,6 +58,7 @@ export abstract class Feed<TPackage extends Package = Package> {
                 values.splice(index, 1);
             }
         }
+        this.cleanLock = false;
     }
 
     protected abstract async Remove(name: string, packages: TPackage[]);
@@ -60,6 +67,7 @@ export abstract class Feed<TPackage extends Package = Package> {
     private Listeners: { key: RegExp, listener: ((name, version) => void) }[] = [];
 
     protected OnUpdate(name, version) {
+        console.log('add', name, version.toString());
         this.Listeners
             .filter(listener => listener.key.test(name))
             .forEach(listener => listener.listener(name, version));

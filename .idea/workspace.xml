@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4ad682b8-36ed-46b6-89bd-3737743dc3ac" name="Default Changelist" comment="а">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/feeds/docker.feed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/feeds/docker.feed.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/start/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/start/server.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1doLYVebRUKrrZW42VOLMI9xLRt" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/handlers" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="A:\autoansible\src\start" />
+      <recent name="A:\autoansible\src\feeds" />
+      <recent name="A:\autoansible\src\cleaner" />
+      <recent name="A:\autoansible\src" />
+    </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="A:\autoansible\src\handlers\upgrade.ts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="A:\autoansible\src\handlers" />
+      <recent name="A:\autoansible\src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.build">
+    <configuration name="server.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="dist/esm/start/server.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="info" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="info" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="run" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="run" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="upd&amp;deploy" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="upd&amp;deploy" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Node.js.server.js" />
+      <item itemvalue="npm.build" />
+      <item itemvalue="npm.info" />
+      <item itemvalue="npm.run" />
+      <item itemvalue="npm.upd&amp;deploy" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.run" />
+        <item itemvalue="npm.upd&amp;deploy" />
+        <item itemvalue="Node.js.server.js" />
+        <item itemvalue="npm.info" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4ad682b8-36ed-46b6-89bd-3737743dc3ac" name="Default Changelist" comment="" />
+      <created>1593086546462</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1593086546462</updated>
+      <workItem from="1610612218840" duration="3864000" />
+      <workItem from="1612367412777" duration="2335000" />
+      <workItem from="1613398312545" duration="960000" />
+    </task>
+    <task id="LOCAL-00001" summary="upd docker cleaner">
+      <created>1608025788344</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1608025788344</updated>
+    </task>
+    <task id="LOCAL-00002" summary="upd docker cleaner">
+      <created>1610612240945</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1610612240945</updated>
+    </task>
+    <task id="LOCAL-00003" summary="а">
+      <created>1610620647846</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1610620647846</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="upd docker cleaner" />
+    <MESSAGE value="а" />
+    <option name="LAST_COMMIT_MESSAGE" value="а" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1215" y="1079" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606753914750">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state x="1215" y="1079" width="1092" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3840.2130@0.0.3840.2130" timestamp="1606753914750" />
+    <state x="1516" y="1041" key="#xdebugger.evaluate" timestamp="1606809909881">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state x="1516" y="1041" key="#xdebugger.evaluate/0.0.3840.2130@0.0.3840.2130" timestamp="1606809909881" />
+    <state width="787" height="630" key="DebuggerActiveHint" timestamp="1612368563961">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state width="787" height="630" key="DebuggerActiveHint/0.0.3840.2130@0.0.3840.2130" timestamp="1612368563961" />
+    <state width="469" height="1063" key="GridCell.Tab.0.bottom" timestamp="1613472716246">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state width="469" height="1063" key="GridCell.Tab.0.bottom/0.0.3840.2130@0.0.3840.2130" timestamp="1613472716246" />
+    <state width="469" height="1063" key="GridCell.Tab.0.center" timestamp="1613472716246">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state width="469" height="1063" key="GridCell.Tab.0.center/0.0.3840.2130@0.0.3840.2130" timestamp="1613472716246" />
+    <state width="469" height="1063" key="GridCell.Tab.0.left" timestamp="1613472716246">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state width="469" height="1063" key="GridCell.Tab.0.left/0.0.3840.2130@0.0.3840.2130" timestamp="1613472716246" />
+    <state width="469" height="1063" key="GridCell.Tab.0.right" timestamp="1613472716246">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state width="469" height="1063" key="GridCell.Tab.0.right/0.0.3840.2130@0.0.3840.2130" timestamp="1613472716246" />
+    <state width="1541" height="599" key="GridCell.Tab.1.bottom" timestamp="1612795219458">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state width="1541" height="599" key="GridCell.Tab.1.bottom/0.0.3840.2130@0.0.3840.2130" timestamp="1612795219458" />
+    <state width="1541" height="599" key="GridCell.Tab.1.center" timestamp="1612795219458">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state width="1541" height="599" key="GridCell.Tab.1.center/0.0.3840.2130@0.0.3840.2130" timestamp="1612795219458" />
+    <state width="1541" height="599" key="GridCell.Tab.1.left" timestamp="1612795219458">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state width="1541" height="599" key="GridCell.Tab.1.left/0.0.3840.2130@0.0.3840.2130" timestamp="1612795219458" />
+    <state width="1541" height="599" key="GridCell.Tab.1.right" timestamp="1612795219458">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state width="1541" height="599" key="GridCell.Tab.1.right/0.0.3840.2130@0.0.3840.2130" timestamp="1612795219458" />
+    <state width="1541" height="599" key="GridCell.Tab.2.bottom" timestamp="1612795219459">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state width="1541" height="599" key="GridCell.Tab.2.bottom/0.0.3840.2130@0.0.3840.2130" timestamp="1612795219459" />
+    <state width="1541" height="599" key="GridCell.Tab.2.center" timestamp="1612795219459">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state width="1541" height="599" key="GridCell.Tab.2.center/0.0.3840.2130@0.0.3840.2130" timestamp="1612795219459" />
+    <state width="1541" height="599" key="GridCell.Tab.2.left" timestamp="1612795219458">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state width="1541" height="599" key="GridCell.Tab.2.left/0.0.3840.2130@0.0.3840.2130" timestamp="1612795219458" />
+    <state width="1541" height="599" key="GridCell.Tab.2.right" timestamp="1612795219459">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state width="1541" height="599" key="GridCell.Tab.2.right/0.0.3840.2130@0.0.3840.2130" timestamp="1612795219459" />
+    <state x="752" y="389" key="MergeDialog" timestamp="1605599170480">
+      <screen x="0" y="0" width="3840" height="2130" />
+    </state>
+    <state x="752" y="389" key="MergeDialog/0.0.3840.2130@0.0.3840.2130" timestamp="1605599170480" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="NodeJSConfigurationType">
+        <watch expression="e" language="TypeScript" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
