@@ -7,7 +7,9 @@
     "upd&deploy": "npm version patch && npm publish"
   },
   "devDependencies": {
-    "@types/node": "latest"
+    "@types/node": "latest",
+    "npm-api": "^1.0.1",
+    "package-json": "^6.5.0"
   },
   "files": [
     "dist"

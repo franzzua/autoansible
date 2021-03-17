@@ -5,10 +5,10 @@ import {AnsibleRoleGroup} from "./ansibleRoleGroup";
 
 export class AnsibleRole {
     public readonly Name: string;
-    Packages: {
-        linux?: string;
-        windows?: string;
-    } = {};
+    Package: {
+        Name: string;
+        Type: string;
+    };
     FullName: string;
 
     constructor(private rootDir, public readonly Group: AnsibleRoleGroup) {
@@ -23,8 +23,7 @@ export class AnsibleRole {
     }
 
     private ReadVars() {
-        this.Packages.linux = this.ReadPackage('linux.yml') ?? this.ReadPackage('common.yml');
-        this.Packages.windows = this.ReadPackage('windows.yml') ?? this.ReadPackage('common.yml');
+        this.Package = this.ReadPackage('common.yml');
     }
 
     private ReadPackage(file) {
@@ -32,8 +31,12 @@ export class AnsibleRole {
         if (fs.existsSync(filePath)) {
             const linuxFile = fs.readFileSync(filePath, 'utf8');
             const config = YAML.parse(linuxFile);
-            return config.package;
+            return {
+                Name: config.package,
+                Type: config['package_type']
+            };
         }
+        console.error(`could not read package from role ${this.FullName}`)
         return undefined;
     }
 

@@ -28,7 +28,7 @@ function print_target_help(groupName, roleName) {
         for (let host of Ansible.Hosts) {
             const config = host.GetConfig(role);
             console.info(`${host.Name}: 
-            ${config.os}, ${role.Packages[config.os]}, versions: ${new RegExp(config.regex || '.*')}`);
+            ${config.os}, ${role.Package.Name}, versions: ${new RegExp(config.regex || '.*')}`);
         }
     } catch (e) {
         console.log(`unknown role ${group}-${role}.`);

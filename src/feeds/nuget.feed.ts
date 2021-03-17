@@ -3,14 +3,32 @@ import {SemVer} from "../sem.ver";
 import {Feed, Package} from "./feed";
 
 export class NugetFeed extends Feed<NugetPackage> {
+    private PackageLoading$: Promise<NugetPackage[]>;
 
-    protected async LoadPackages() {
+    protected async LoadPackage(pkg: string): Promise<NugetPackage[]> {
+        return (await this.PackageLoading$)
+            .filter(x => x.Name == pkg);
+    }
+
+    protected async Update() {
+        this.PackageLoading$ = this.GetPackages();
+        await super.Update();
+    }
+
+    async Has(pkg: string, pkgType: string, os?: string): Promise<any> {
+        if (pkgType != "nuget")
+            return false;
+        if (os && os != this.os)
+            return false;
+        return true;
+    }
+
+    protected async GetPackages(): Promise<NugetPackage[]> {
         try {
             const packagesResult: any = await requestAsync(this.host, `/nuget/${this.feed}/Packages?\$format=json`);
             const packages = packagesResult.d.results.map(({Id, Version}) => ({Id, Version}));
-            packages
+            return packages
                 .map(pkg => ({Name: pkg.Id, Version: SemVer.Parse(pkg.Version)} as NugetPackage))
-                .forEach(pkg => this.LoadPackage(pkg));
         } catch (e) {
             console.error(this.host, `/nuget/${this.feed}/Packages?\$format=json`, e);
         }

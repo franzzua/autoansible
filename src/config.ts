@@ -3,9 +3,10 @@ import {readFileSync} from "fs";
 export const config: {
     log: string;
     feeds: {
-        type: 'nuget' | 'docker';
+        type: 'nuget' | 'docker' | 'npm';
         host: string;
         feed: string;
+        os?: string;
         token?: string;
     }[];
     ansible: {

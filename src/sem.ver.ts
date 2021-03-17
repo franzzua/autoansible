@@ -3,23 +3,26 @@ export class SemVer {
         if (a.Major != b.Major) return a.Major - b.Major;
         if (a.Minor != b.Minor) return a.Minor - b.Minor;
         if (a.Patch != b.Patch) return a.Patch - b.Patch;
-        if (a.Build != b.Build) return a.Build - b.Build;
-        return 0;
+        if (!a.Prerelease && b.Prerelease)
+            return 1;
+        if (a.Prerelease && !b.Prerelease)
+            return -1;
+        return a.Prerelease - b.Prerelease;
     }
 
     private constructor(
         public Major,
         public Minor,
         public Patch,
-        public Build?
+        public Prerelease?
     ) {
 
     }
 
 
     static Parse(version: string): SemVer {
-        const [Major, Minor, Patch, Build] = version.split('.');
-        return new SemVer(Major, Minor, Patch, Build);
+        const [Major, Minor, Patch, Prerelease] = version.split(/[.-]/);
+        return new SemVer(Major, Minor, Patch, Prerelease);
     }
 
     public Equals = (semVer: SemVer) => {
@@ -28,8 +31,8 @@ export class SemVer {
 
     public toString() {
         return [
-            this.Major, this.Minor, this.Patch, this.Build
-        ].filter(p => p).join('.');
+            this.Major, this.Minor, this.Patch
+        ].join('.') + (this.Prerelease ? `-${this.Prerelease}` : '');
     }
 
 }

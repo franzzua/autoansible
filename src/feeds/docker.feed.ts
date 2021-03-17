@@ -5,28 +5,27 @@ import {SemVer} from "../sem.ver";
 
 export type DockerPackage = Package & {Manifest;};
 export class DockerFeed extends Feed<DockerPackage> {
+    async Has(pkg: string, pkgType: string, os?: string): Promise<any> {
+        if (pkgType != "docker")
+            return false;
+        return Promise.resolve(undefined);
+    }
     private Layers: string[];
 
-    protected async LoadPackages() {
+    protected async LoadPackage(repo): Promise<DockerPackage[]> {
         try {
-            const {repositories} = await requestAsync(this.host, `/v2/_catalog`);
-            for await (let repo of repositories.filter((x: string) => x.startsWith(this.feed))) {
-                const {tags} = await requestAsync(this.host, `/v2/${repo}/tags/list`);
-                const existed = this.Packages[repo]?.map(x => x.Version.toString()) ?? [];
-                for (let tag of tags) {
-                    if (existed.includes(tag))
-                        continue;
-                    const manifest = await this.getManifest(repo, tag);
-                    console.log('new', repo, tag);
-                    this.LoadPackage({
-                        Name: repo,
-                        Version: SemVer.Parse(tag),
-                        Manifest: manifest
-                    });
-                }
-            }
+            const {tags} = await requestAsync(this.host, `/v2/${repo}/tags/list`);
+            return await Promise.all(tags.map(async tag => {
+                const manifest = await this.getManifest(repo, tag);
+                console.log('new', repo, tag);
+                return {
+                    Name: repo,
+                    Version: SemVer.Parse(tag),
+                    Manifest: manifest
+                } as DockerPackage;
+            }));
         } catch (e) {
-            console.error(this.host, `/nuget/${this.feed}/Packages?\$format=json`,e);
+            console.error(this.host, `/docker/${this.feed}/Packages?\$format=json`,e);
         }
     }
 
@@ -39,7 +38,7 @@ export class DockerFeed extends Feed<DockerPackage> {
         // все слои из удаляемых пакетов
         const layersToDelete =  [...new Set(packages.flatMap(x => this.getLayers(x.Manifest)))];
         // неудаляемые пакеты
-        const notDeletePackages = this.Packages[name].filter(x => !packages.includes(x));
+        const notDeletePackages = this.Packages[name].Packages.filter(x => !packages.includes(x));
         // слои которые нужно оставить
         const notDeleteLayers =  new Set(notDeletePackages.flatMap(x => this.getLayers(x.Manifest)));
         // слои которые нужно удалить - все из удаляемых кроме тех что нужно оставить
@@ -88,8 +87,8 @@ export class DockerFeed extends Feed<DockerPackage> {
     public async getAllLayers(): Promise<{image,layers}[]> {
         await this.init$;
         const res = [] as {image,layers}[];
-        for (let pacakges of Object.values(this.Packages)){
-            for (let p of pacakges){
+        for (let c of Object.values(this.Packages)){
+            for (let p of c.Packages){
                 if (p.Manifest.layers){
                     res.push({
                         image: `${p.Name}.${p.Version.toString()}}`,

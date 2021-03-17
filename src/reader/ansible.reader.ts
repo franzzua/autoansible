@@ -36,7 +36,7 @@ export class AnsibleConfig {
         const info = host.GetConfig(role);
         return {
             ...info,
-            package: role.Packages[info.os]
+            package: role.Package.Name
         };
     }
 }

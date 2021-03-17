@@ -24,30 +24,27 @@ async function getAllLayers(){
 
 }
 
-function listen() {
-    Feeds.forEach(listener => {
-
-        listener.init$.then(() => {
-
-            listener.Listen(/.*/, (name, version) => {
-                AutoTasks
-                    .filter(cfg => cfg.pkg == name && cfg.version.test(version))
-                    .forEach(task => deployWithQueue({
-                        ...task,
-                        version: version
-                    }, () => {}, () => {}));
-            });
-            //
-            // Object.entries(nugetListener.Packages)
-            //     .forEach(([name, versions]) => {
-            //         const lastVerion = versions.sort(SemVer.compare)[versions.length - 1];
-            //         console.log(`${name}@${lastVerion.toString()}`);
-            //     });
-            console.log('listening...');
-        });
-    });
+async function findFeed(autoTask){
+    for (let feed of Feeds){
+        if (await feed.Has(autoTask.package, autoTask.packageType, autoTask.os))
+            return feed;
+    }
 }
 
-getAllLayers();
+async function listen() {
+    for (let autoTask of AutoTasks) {
+        const feed = await findFeed(autoTask);
+        await feed.ListenPackage(autoTask.package, (name, version) => {
+            deployWithQueue({
+                ...autoTask,
+                version
+            });
+        });
+    }
+}
+
+// getAllLayers();
+
+listen();
 
 runServer();

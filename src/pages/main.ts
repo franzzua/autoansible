@@ -6,7 +6,7 @@ import {Log} from "../log";
 export function hostTemplate(pkg, host, group, role, regex: RegExp) {
     if (!pkg) return '';
     const versions = Feeds
-        .flatMap(x => x.Packages[pkg] ?? [])
+        .flatMap(x => x.Packages[pkg]?.Packages ?? [])
         .map(x => x.Version)
         .filter(x => regex.test(x.toString()))
         .filter(x => x.toString() != 'latest')

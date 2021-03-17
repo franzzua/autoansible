@@ -1,5 +1,6 @@
 import {SemVer} from "../sem.ver";
 import {config} from "../config";
+import {resolveSrv} from "dns";
 
 export type Package = { Name: string; Version: SemVer; }
 
@@ -11,12 +12,13 @@ export abstract class Feed<TPackage extends Package = Package> {
     // protected repositoryPath: string;
 
     public Packages: {
-        [key: string]: TPackage[]
+        [key: string]: { Packages: TPackage[]; Listeners: ((name, version)=>void)[]}
     } = {};
 
     constructor(protected host: string,
                 protected feed: string,
-                protected token) {
+                protected token?: string,
+                protected os?: string) {
         this.interval = setInterval(() => this.Update(), 60000);
         this.Update();
     }
@@ -29,9 +31,16 @@ export abstract class Feed<TPackage extends Package = Package> {
     })();
 
 
-    public async Listen(key: RegExp, listener: (name, version) => void) {
-        await this.init$;
-        this.Listeners.push({key, listener});
+    public async ListenPackage(pkg: string, listener: (name, version) => void) {
+        if (pkg in this.Packages){
+            this.Packages[pkg].Listeners.push(listener);
+            return;
+        }
+        const packages = await this.LoadPackage(pkg);
+        this.Packages[pkg] = {
+            Packages: packages,
+            Listeners: [listener]
+        };
     }
 
 
@@ -41,11 +50,12 @@ export abstract class Feed<TPackage extends Package = Package> {
         if (this.cleanLock)
             return;
         this.cleanLock = true;
-        for (const [name, values] of Object.entries(this.Packages)) {
+        for (const name in this.Packages) {
+            const packages = this.Packages[name].Packages;
             const toRemove: TPackage[] = [];
             for (let rule of rules) {
                 const regex = new RegExp(rule.versions);
-                const versions = values
+                const versions = packages
                     .filter(x => regex.test(x.Version.toString()));
                 if (versions.length > rule.count)
                     toRemove.push(...versions.slice(0, -rule.count));
@@ -54,8 +64,8 @@ export abstract class Feed<TPackage extends Package = Package> {
                 continue;
             await this.Remove(name, toRemove);
             for (let version of toRemove) {
-                const index = values.indexOf(version);
-                values.splice(index, 1);
+                const index = packages.indexOf(version);
+                packages.splice(index, 1);
             }
         }
         this.cleanLock = false;
@@ -63,34 +73,31 @@ export abstract class Feed<TPackage extends Package = Package> {
 
     protected abstract async Remove(name: string, packages: TPackage[]);
 
-
-    private Listeners: { key: RegExp, listener: ((name, version) => void) }[] = [];
-
-    protected OnUpdate(name, version) {
-        console.log('add', name, version.toString());
-        this.Listeners
-            .filter(listener => listener.key.test(name))
-            .forEach(listener => listener.listener(name, version));
-    }
-
-    private async Update() {
+    protected async Update() {
         if (this.updateLock)
             return;
         this.updateLock = true;
-        await this.LoadPackages();
+        for (let pkg in this.Packages) {
+            const packages = await this.LoadPackage(pkg);
+            for (let newPackage of packages) {
+                if (!this.Packages[pkg].Packages.some(x => x.Version.Equals(newPackage.Version))){
+                    this.OnUpdate(newPackage.Name, newPackage.Version)
+                }
+            }
+        }
         this.init$.resolve();
         this.updateLock = false;
         this.Clean(config.cleaner.rules)
     }
 
-    protected abstract async LoadPackages();
-
-
-    protected LoadPackage(pkg: TPackage) {
-        if (!this.Packages[pkg.Name]) this.Packages[pkg.Name] = [];
-        if (!this.Packages[pkg.Name].some(x => pkg.Version.Equals(x.Version))) {
-            this.Packages[pkg.Name].push(pkg);
-            this.OnUpdate(pkg.Name, pkg.Version);
+    protected OnUpdate(name, version) {
+        console.log('add', name, version.toString());
+        for (let listener of this.Packages[name].Listeners) {
+            listener(name, version);
         }
     }
+
+    protected abstract async LoadPackage(pkg: string): Promise<TPackage[]>;
+
+    public async abstract Has(pkg: string, pkgType: string, os?: string);
 }

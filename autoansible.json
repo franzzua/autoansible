@@ -19,9 +19,23 @@
     },
     {
       "host": "proget2.mapmakers.ru",
-      "feed": "artifacts",
+      "feed": "linux",
+      "os": "linux",
       "token": "48bKfRr9TZZjEykbmkDB",
       "type": "nuget"
+    },
+    {
+      "host": "proget2.mapmakers.ru",
+      "feed": "windows",
+      "os": "windows",
+      "token": "48bKfRr9TZZjEykbmkDB",
+      "type": "nuget"
+    },
+    {
+      "host": "proget2.mapmakers.ru",
+      "feed": "npm",
+      "token": "48bKfRr9TZZjEykbmkDB",
+      "type": "npm"
     }
   ],
   "cleaner": {

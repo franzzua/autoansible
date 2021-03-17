@@ -14,19 +14,23 @@ export const AutoTaskGroups: {
             host: string;
             os: string;
             package: string;
+            packageType: string;
             regex: RegExp
         }[];
     }[]
 }[] = Ansible.RoleGroups.map(gr => ({
     group: gr.Name,
-    roles: gr.Roles.map(role => ({
+    roles: gr.Roles
+        .filter(x => x.Package != null)
+        .map(role => ({
         role: role.Name,
         hosts: Ansible.Hosts.map(host => {
             const config = host.GetConfig(role);
             return ({
                 host: host.Name,
                 os: config.os,
-                package: role.Packages[config.os],
+                package: role.Package.Name,
+                packageType: role.Package.Type,
                 regex: new RegExp(config.regex)
             });
         })
@@ -34,7 +38,7 @@ export const AutoTaskGroups: {
 }));
 
 export interface ITaskTemplate {
-    os, group, role, host, pkg, enabled, version: RegExp
+    os, group, role, host, package, packageType, enabled, version: RegExp
 }
 export interface ITask {
     os, group, role, host, version: SemVer
@@ -45,7 +49,8 @@ export const AutoTasks: ITaskTemplate[] = AutoTaskGroups.flatMap(group =>
         host: host.host,
         version: host.regex,
         enabled: 1,
-        pkg: host.package,
+        package: host.package,
+        packageType: host.packageType,
         role: role.role,
         os: host.os,
         group: group.group
