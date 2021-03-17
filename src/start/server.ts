@@ -34,6 +34,8 @@ async function findFeed(autoTask){
 async function listen() {
     for (let autoTask of AutoTasks) {
         const feed = await findFeed(autoTask);
+        if (!feed)
+            continue;
         await feed.ListenPackage(autoTask.package, (name, version) => {
             deployWithQueue({
                 ...autoTask,
