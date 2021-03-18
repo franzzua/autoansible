@@ -80,14 +80,21 @@ export abstract class Feed<TPackage extends Package = Package> {
         for (let pkg in this.Packages) {
             const packages = await this.LoadPackage(pkg);
             for (let newPackage of packages) {
-                if (!this.Packages[pkg].Packages.some(x => x.Version.Equals(newPackage.Version))){
-                    this.OnUpdate(newPackage.Name, newPackage.Version)
-                }
+                this.TryAdd(newPackage);
             }
         }
         this.init$.resolve();
         this.updateLock = false;
         this.Clean(config.cleaner.rules)
+    }
+
+    private TryAdd(newPackage: TPackage){
+        const existedVersions = this.Packages[newPackage.Name].Packages.map(x => x.Version);
+        if (existedVersions.some(x => x.Equals(newPackage.Version))) {
+            return;
+        }
+        this.Packages[newPackage.Name].Packages.push(newPackage);
+        this.OnUpdate(newPackage.Name, newPackage.Version)
     }
 
     protected OnUpdate(name, version) {
