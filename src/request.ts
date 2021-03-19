@@ -1,6 +1,6 @@
 import * as https from "https";
 
-export const requestAsync = (hostname, path, method = 'GET', headers = {}, auth = undefined) => new Promise<any>((resolve, reject) => {
+export const requestAsync = (hostname, path, method = 'GET', headers = {}, auth = undefined, body = null) => new Promise<any>((resolve, reject) => {
     const options = {
         method, auth, path, hostname,
         headers: {
@@ -9,7 +9,7 @@ export const requestAsync = (hostname, path, method = 'GET', headers = {}, auth 
         }
     };
     try {
-        https.request(options, res => {
+        const req = https.request(options, res => {
             if (res.statusCode < 300) {
                 let textData = '';
                 res.on('data', data => textData += data);
@@ -23,9 +23,12 @@ export const requestAsync = (hostname, path, method = 'GET', headers = {}, auth 
                     reject(res.statusCode);
                 });
             }
-        }).end()
+        });
+        if (body)
+            req.write(body);
+        req.end()
     }catch (e) {
-        console.error(options);
+        console.error(e);
         reject(options);
     }
 });

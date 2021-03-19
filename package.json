@@ -19,8 +19,9 @@
   "dependencies": {
     "ini": "latest",
     "nedb": "^1.8.0",
-    "yaml": "latest",
-    "typescript": "3.7.4"
+    "npm-registry-fetch": "^9.0.0",
+    "typescript": "3.7.4",
+    "yaml": "latest"
   },
   "version": "1.2.3"
 }

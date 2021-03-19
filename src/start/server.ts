@@ -37,12 +37,15 @@ async function listen() {
         if (!feed)
             continue;
         await feed.ListenPackage(autoTask.package, (name, version) => {
-            deployWithQueue({
-                ...autoTask,
-                version
-            });
+            if (autoTask.version.test(version.toString())) {
+                deployWithQueue({
+                    ...autoTask,
+                    version
+                });
+            }
         });
     }
+    Feeds.forEach(x => x.Update());
 }
 
 // getAllLayers();

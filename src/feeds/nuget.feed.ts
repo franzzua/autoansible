@@ -10,7 +10,7 @@ export class NugetFeed extends Feed<NugetPackage> {
             .filter(x => x.Name == pkg);
     }
 
-    protected async Update() {
+    public async Update() {
         this.PackageLoading$ = this.GetPackages();
         await super.Update();
     }

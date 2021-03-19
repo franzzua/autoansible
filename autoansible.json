@@ -34,14 +34,14 @@
     {
       "host": "proget2.mapmakers.ru",
       "feed": "npm",
-      "token": "48bKfRr9TZZjEykbmkDB",
+      "token": "EdAZbPu8PyaJM4kloKBd",
       "type": "npm"
     }
   ],
   "cleaner": {
     "rules": [
       {
-        "versions": "^(\\d+\\.){3}\\d+$",
+        "versions": "^(\\d+[\\.-]){3}\\d+$",
         "count": 3
       },
       {

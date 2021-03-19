@@ -49,6 +49,7 @@ export abstract class Feed<TPackage extends Package = Package> {
     public async Clean(rules: { versions, count }[]) {
         if (this.cleanLock)
             return;
+        console.log('start clean');
         this.cleanLock = true;
         for (const name in this.Packages) {
             const packages = this.Packages[name].Packages;
@@ -56,24 +57,26 @@ export abstract class Feed<TPackage extends Package = Package> {
             for (let rule of rules) {
                 const regex = new RegExp(rule.versions);
                 const versions = packages
+                    .sort((a,b) => SemVer.compare(a.Version, b.Version))
                     .filter(x => regex.test(x.Version.toString()));
                 if (versions.length > rule.count)
                     toRemove.push(...versions.slice(0, -rule.count));
             }
             if (toRemove.length == 0)
                 continue;
-            await this.Remove(name, toRemove);
-            for (let version of toRemove) {
-                const index = packages.indexOf(version);
-                packages.splice(index, 1);
+            try {
+                await this.Remove(name, toRemove);
+            }catch (e) {
+                console.warn(e);
             }
+            this.Packages[name].Packages = await this.LoadPackage(name);
         }
         this.cleanLock = false;
     }
 
     protected abstract async Remove(name: string, packages: TPackage[]);
 
-    protected async Update() {
+    public async Update() {
         if (this.updateLock)
             return;
         this.updateLock = true;
@@ -81,6 +84,13 @@ export abstract class Feed<TPackage extends Package = Package> {
             const packages = await this.LoadPackage(pkg);
             for (let newPackage of packages) {
                 this.TryAdd(newPackage);
+            }
+            for (let i = 0; i < this.Packages[pkg].Packages.length; i++){
+                const oldPackage = this.Packages[pkg].Packages[i];
+                if (!packages.some(x => x.Version.Equals(oldPackage.Version))){
+                    this.Packages[pkg].Packages.splice(i,1);
+                    i--;
+                }
             }
         }
         this.init$.resolve();

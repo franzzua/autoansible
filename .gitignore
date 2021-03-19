@@ -6,3 +6,4 @@ localhost-privkey.pem
 package-lock.json
 .idea
 log.db
+.npmrc
