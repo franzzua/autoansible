@@ -1,7 +1,7 @@
 {
   "ansible": {
     "wsl": true,
-    "rootDir": "a:\\mm\\back\\infra-webgis\\",
+    "rootDir": "a:\\infra-webgis\\",
     "playbook": "apps.yml"
   },
   "feeds": [
@@ -41,16 +41,16 @@
   "cleaner": {
     "rules": [
       {
-        "versions": "^(\\d+[\\.-]){3}\\d+$",
+        "versions": "^\\d+\\.\\d+\\.\\d+-\\d+$",
         "count": 3
       },
       {
-        "versions": "^(\\d+\\.){2}[1-9]\\d*$",
-        "count": 3
+        "versions": "^(\\d+\\.\\d+)\\.\\d+$",
+        "count": 2
       },
       {
-        "versions": "^(\\d+\\.){2}0$",
-        "count": 3
+        "versions": "^(\\d+)\\.\\d+\\.\\d+$",
+        "count": 1
       }
     ]
   },

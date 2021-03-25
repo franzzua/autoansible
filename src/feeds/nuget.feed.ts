@@ -16,11 +16,11 @@ export class NugetFeed extends Feed<NugetPackage> {
     }
 
     async Has(pkg: string, pkgType: string, os?: string): Promise<any> {
-        if (pkgType != "nuget")
-            return false;
-        if (os && os != this.os)
-            return false;
-        return true;
+        return this.Match(pkgType,os);
+    }
+
+    public Match(pkgType: string, os?: string): boolean {
+        return pkgType == "nuget" && this.os == os;
     }
 
     protected async GetPackages(): Promise<NugetPackage[]> {

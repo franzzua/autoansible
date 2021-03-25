@@ -5,10 +5,13 @@ import {SemVer} from "../sem.ver";
 
 export type DockerPackage = Package & {Manifest;};
 export class DockerFeed extends Feed<DockerPackage> {
+    public Match(pkgType: string, os?: string): boolean {
+        return pkgType == "docker";
+    }
     async Has(pkg: string, pkgType: string, os?: string): Promise<any> {
         if (pkgType != "docker")
             return false;
-        return Promise.resolve(undefined);
+        return true;
     }
     private Layers: string[];
 

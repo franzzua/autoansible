@@ -6,19 +6,21 @@ import {Ansible} from "./reader";
 
 export const Hosts =Ansible.Hosts.map(x => x.Name);
 
-export const AutoTaskGroups: {
+export type HostInfo = {
+    host: string;
+    os: string;
+    package: string;
+    packageType: string;
+    regex: RegExp
+}
+export type AutoTaskGroup = {
     group: string;
     roles: {
         role: string;
-        hosts: {
-            host: string;
-            os: string;
-            package: string;
-            packageType: string;
-            regex: RegExp
-        }[];
+        hosts: HostInfo[];
     }[]
-}[] = Ansible.RoleGroups.map(gr => ({
+}
+export const AutoTaskGroups: AutoTaskGroup[] = Ansible.RoleGroups.map(gr => ({
     group: gr.Name,
     roles: gr.Roles
         .filter(x => x.Package != null)

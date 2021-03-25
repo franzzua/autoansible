@@ -30,6 +30,10 @@ export class NpmFeed extends Feed<Package> {
         return true;
     }
 
+    public Match(pkgType: string, os?: string): boolean {
+        return pkgType == "npm";
+    }
+
     protected async Remove(name: string, packages: Package[]): Promise<any> {
         for (let pkg of packages) {
             const resp = await requestAsync(this.host, `/api/json/NpmPackages_DeletePackage`, 'post', {

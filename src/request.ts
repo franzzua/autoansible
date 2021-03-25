@@ -15,7 +15,8 @@ export const requestAsync = (hostname, path, method = 'GET', headers = {}, auth 
                 res.on('data', data => textData += data);
                 res.on('end', (data) => resolve({
                     ...(textData ? JSON.parse(textData) : {}),
-                    _headers: res.headers
+                    _headers: res.headers,
+                    statusCode: res.statusCode
                 }));
             } else {
                 res.on('data', data => reject(data.toString()));

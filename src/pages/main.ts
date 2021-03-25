@@ -1,19 +1,22 @@
-import {AutoTaskGroups, Hosts} from "../auto.tasks";
+import {AutoTaskGroup, AutoTaskGroups, HostInfo, Hosts} from "../auto.tasks";
 import {SemVer} from "../sem.ver";
 import {Feeds} from "../feeds/feeds";
 import {Log} from "../log";
 
-export function hostTemplate(pkg, host, group, role, regex: RegExp) {
+export function hostTemplate(pkg, x: HostInfo, group, role, regex: RegExp) {
     if (!pkg) return '';
-    const versions = Feeds
-        .flatMap(x => x.Packages[pkg]?.Packages ?? [])
+    const feed = Feeds
+        .find(feed => feed.Match(x.packageType, x.os));
+    if (!feed?.Packages[pkg]?.Packages?.length)
+        return '';
+    const versions = feed.Packages[pkg].Packages
         .map(x => x.Version)
         .filter(x => regex.test(x.toString()))
         .filter(x => x.toString() != 'latest')
         .sort(SemVer.compare)
         .reverse();
     const lastResult = Log.LastData.find(Log.Equals({
-        host, group, role
+        host: x.host, group, role
     }));
     const pkgParts = pkg.split(/[\.\/]/);
     const main = pkgParts.pop();
@@ -31,40 +34,42 @@ export function hostTemplate(pkg, host, group, role, regex: RegExp) {
                         ${version.toString()}
                     </option>`).join('\n')}
             </select>
-            <button data-host=${host} data-role=${group}-${role} data-pkg=${pkg} onclick="deploy(event.target)"
+            <button data-host=${x.host} data-role=${group}-${role} data-pkg=${pkg} onclick="deploy(event.target)"
                     class="deploy"></button>
         </div>
          ` : ''}
    </div>
 `
 }
+type ArrayElement<ArrayType extends readonly unknown[]> =
+    ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
 
-export function roleTemplate({role, hosts}, group) {
+export function roleTemplate(x: ArrayElement<AutoTaskGroup["roles"]>, group) {
     return `
     <tr>
-        <td>${role}</td> 
+        <td>${x.role}</td> 
         ${Hosts
-        .map(h => hosts.find(x => x.host == h))
+        .map(h => x.hosts.find(x => x.host == h))
         .map(host => {
             const pkg = host.package;
             const regExp = host.regex;
             return `<td>
-                ${hostTemplate(pkg, host.host, group, role, regExp)}
+                ${hostTemplate(pkg, host, group, x.role, regExp)}
             </td>`;
         }).join('\n')}
     </tr>
 `;
 }
 
-export function groupTemplate({group, roles}) {
+export function groupTemplate(x: AutoTaskGroup) {
     return `
-        <tr class="group"><td>${group}</td>${Hosts.map(host => `
+        <tr class="group"><td>${x.group}</td>${Hosts.map(host => `
 <td>
-    <button data-host=${host} data-role=${group}-all onclick="deploy(event.target)"
+    <button data-host=${host} data-role=${x.group}-all onclick="deploy(event.target)"
             class="deploy all"></button>
 </td>
 `).join('\n')}</tr>
-        ${roles.map(x => roleTemplate(x, group)).join('\n')}
+        ${x.roles.map(role => roleTemplate(role, x.group)).join('\n')}
     `
 }
 

@@ -41,6 +41,7 @@ export abstract class Feed<TPackage extends Package = Package> {
             Packages: packages,
             Listeners: [listener]
         };
+        console.log('load', pkg, ...packages.map(x => x.Version.toString()));
     }
 
 
@@ -49,26 +50,46 @@ export abstract class Feed<TPackage extends Package = Package> {
     public async Clean(rules: { versions, count }[]) {
         if (this.cleanLock)
             return;
-        console.log('start clean');
         this.cleanLock = true;
         for (const name in this.Packages) {
             const packages = this.Packages[name].Packages;
-            const toRemove: TPackage[] = [];
+            if (!packages.length)
+                continue;
+            const matches: {
+                [match: string]: {limit: number; toLeave: TPackage[]; toDelete: TPackage[]}
+            } = {};
             for (let rule of rules) {
                 const regex = new RegExp(rule.versions);
-                const versions = packages
-                    .sort((a,b) => SemVer.compare(a.Version, b.Version))
-                    .filter(x => regex.test(x.Version.toString()));
-                if (versions.length > rule.count)
-                    toRemove.push(...versions.slice(0, -rule.count));
+                for (let pkg of packages) {
+                    const version = pkg.Version.toString();
+                    const match = version.match(regex);
+                    if (!match)
+                        continue;
+                    const groupKey = match[1] || 'all';
+                    if (!matches[groupKey]) matches[groupKey] = {
+                        limit: rule.count,
+                        toLeave: [],
+                        toDelete: []
+                    }
+                    matches[groupKey].toLeave.push(pkg);
+                }
+                // const versions = packages
+                //     .filter(x => regex.test(x.Version.toString()));
+                // if (versions.length > rule.count)
+                //     toRemove.push(...versions.slice(0, -rule.count));
             }
+            const toLeave: TPackage[] = [];
+            for (let groupKey in matches){
+                matches[groupKey].toLeave.sort((a,b) => SemVer.compare(a.Version, b.Version));
+                toLeave.push(...matches[groupKey].toLeave.slice( - matches[groupKey].limit));
+            }
+            console.log('leave', name, ...toLeave.map(x => x.Version.toString()));
+            const toRemove: TPackage[] = packages
+                .filter(x => !toLeave.includes(x))
             if (toRemove.length == 0)
                 continue;
-            try {
-                await this.Remove(name, toRemove);
-            }catch (e) {
-                console.warn(e);
-            }
+            console.log('remove', name, ...toRemove.map(x => x.Version.toString()));
+            await this.Remove(name, toRemove);
             this.Packages[name].Packages = await this.LoadPackage(name);
         }
         this.cleanLock = false;
@@ -76,7 +97,7 @@ export abstract class Feed<TPackage extends Package = Package> {
 
     protected abstract async Remove(name: string, packages: TPackage[]);
 
-    public async Update() {
+    protected async Update() {
         if (this.updateLock)
             return;
         this.updateLock = true;
@@ -108,7 +129,7 @@ export abstract class Feed<TPackage extends Package = Package> {
     }
 
     protected OnUpdate(name, version) {
-        console.log('add', name, version.toString());
+        console.log('new', name, version.toString());
         for (let listener of this.Packages[name].Listeners) {
             listener(name, version);
         }
@@ -117,4 +138,5 @@ export abstract class Feed<TPackage extends Package = Package> {
     protected abstract async LoadPackage(pkg: string): Promise<TPackage[]>;
 
     public async abstract Has(pkg: string, pkgType: string, os?: string);
+    public abstract Match(pkgType: string, os?: string): boolean;
 }

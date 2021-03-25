@@ -6,6 +6,7 @@ import {runServer} from "../server";
 import {Feeds} from "../feeds/feeds";
 import {DockerFeed} from "../feeds/docker.feed";
 import * as fs from "fs";
+import {config} from "../config";
 
 
 async function getAllLayers(){
@@ -29,6 +30,9 @@ async function findFeed(autoTask){
         if (await feed.Has(autoTask.package, autoTask.packageType, autoTask.os))
             return feed;
     }
+    for (let feed of Feeds) {
+        await feed.Clean(config.cleaner.rules);
+    }
 }
 
 async function listen() {
@@ -45,7 +49,7 @@ async function listen() {
             }
         });
     }
-    Feeds.forEach(x => x.Update());
+    Feeds.forEach(x => x.Clean(config.cleaner.rules));
 }
 
 // getAllLayers();
